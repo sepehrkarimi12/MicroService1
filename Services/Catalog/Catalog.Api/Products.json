@@ -1,0 +1,16 @@
+[
+  {
+    "Name": "Asus",
+    "Category": "Computers",
+    "Description": "Description",
+    "ImageFile": "ImageFile",
+    "Price": "100"
+  },
+  {
+    "Name": "Hp",
+    "Category": "Computers",
+    "Description": "Description",
+    "ImageFile": "ImageFile",
+    "Price": "200"
+  }
+]
