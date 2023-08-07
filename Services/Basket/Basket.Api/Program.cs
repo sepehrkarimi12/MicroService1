@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 //redis config
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = "localhost:6379";
+    options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
 });
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
