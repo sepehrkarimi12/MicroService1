@@ -17,10 +17,17 @@ namespace Discount.Api.Repositories
         {
             using (var connection = new NpgsqlConnection(this._configuration.GetValue<string>("DatabaseSettings:ConnectionString")))
             {
+                var coupon0 = await connection.QueryFirstOrDefaultAsync<Coupon>("SELECT * FROM Coupon");
+                var coupon1 = await connection.QueryFirstOrDefaultAsync<Coupon>(
+                    "SELECT * FROM Coupon WHERE Id = @Id",
+                    new { Id = 1 });
+                var coupon2 = await connection.QueryFirstOrDefaultAsync<Coupon>(
+                    "SELECT * FROM Coupon WHERE Id = 1");
                 var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(
-                    "SELECT 8 FROM coupon WHERE ProductName = @ProductName", new { ProductName = productName });
+                        "SELECT * FROM Coupon WHERE ProductName = @ProductName", 
+                        new { ProductName = productName });
                 if (coupon == null)
-                    return new Coupon() { ProductName = "No Discount", Amount = 0, Description = "NO Discount"};
+                    return new Coupon { ProductName = "No Discount", Amount = 0, Description = "NO Discount"};
                 return coupon;
             }
         }
@@ -42,8 +49,8 @@ namespace Discount.Api.Repositories
             using (var connection = new NpgsqlConnection(this._configuration.GetValue<string>("DatabaseSettings:ConnectionString")))
             {
                 var affected = await connection.ExecuteAsync(
-                    "UPDATE Coupon SET ProductName = @ProductName, Description = @Description, Amount = @Amount",
-                    new { ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount }
+                    "UPDATE Coupon SET ProductName = @ProductName, Description = @Description, Amount = @Amount Where Id=@id",
+                    new { Id = coupon.Id, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount }
                 );
                 return affected != 0;
             }
