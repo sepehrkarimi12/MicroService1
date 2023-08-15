@@ -27,10 +27,10 @@ namespace Discount.Api.Extensions
                     command.CommandText = @"CREATE TABLE Coupon(Id SERIAL PRIMARY KEY, ProductName VARCHAR(200) NOT NULL, Description TEXT, Amount INT)";
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount) VALUES ('Iphone x','Goolakh Phone!!',254)";
+                    command.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount) VALUES ('Iphone X','Goolakh Phone!!',150)";
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount) VALUES ('Samsung Gallaxy S23 ultra','Such a Wow!!',105)";
+                    command.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount) VALUES ('Samsung A10','Such a Wow!!',150)";
                     command.ExecuteNonQuery();
 
                     logger.LogInformation("migration has been completed!");

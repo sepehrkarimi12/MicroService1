@@ -17,12 +17,6 @@ namespace Discount.Grpc.Repositories
         {
             using (var connection = new NpgsqlConnection(this._configuration.GetValue<string>("DatabaseSettings:ConnectionString")))
             {
-                var coupon0 = await connection.QueryFirstOrDefaultAsync<Coupon>("SELECT * FROM Coupon");
-                var coupon1 = await connection.QueryFirstOrDefaultAsync<Coupon>(
-                    "SELECT * FROM Coupon WHERE Id = @Id",
-                    new { Id = 1 });
-                var coupon2 = await connection.QueryFirstOrDefaultAsync<Coupon>(
-                    "SELECT * FROM Coupon WHERE Id = 1");
                 var coupon = await connection.QueryFirstOrDefaultAsync<Coupon>(
                         "SELECT * FROM Coupon WHERE ProductName = @ProductName", 
                         new { ProductName = productName });

@@ -12,11 +12,13 @@ namespace Basket.Api.Controllers
     {
         private readonly IBasketRepository _basketRepository;
         private readonly DiscountGrpcService _discountGrpcService;
+        private readonly ILogger<BasketController> _logger;
 
-        public BasketController(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService)
+        public BasketController(IBasketRepository basketRepository, DiscountGrpcService discountGrpcService, ILogger<BasketController> logger)
         {
             _basketRepository = basketRepository;
             _discountGrpcService = discountGrpcService;
+            _logger = logger;
         }
 
         [HttpGet("{userName}", Name = "GetBasket")]
@@ -35,6 +37,7 @@ namespace Basket.Api.Controllers
             foreach (var item in basket.Items)
             {
                 var coupon = await _discountGrpcService.GetDiscount(item.ProductName);
+                this._logger.LogInformation($"coupon value for {item.ProductName} is {coupon.Amount} : {item.Price} => {item.Price - coupon.Amount}");
                 item.Price -= coupon.Amount;
             }
             return Ok(await _basketRepository.UpdateBasket(basket));
