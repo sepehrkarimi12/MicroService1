@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.Features;
-
-namespace Basket.Api.Entities
+﻿namespace Basket.Api.Entities
 {
     public class ShoppingCart
     {
