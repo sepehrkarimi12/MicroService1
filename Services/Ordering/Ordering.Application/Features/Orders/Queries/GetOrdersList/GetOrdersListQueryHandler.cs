@@ -1,6 +1,4 @@
-﻿using System.Xml;
-using AutoMapper;
-using AutoMapper.Configuration;
+﻿using AutoMapper;
 using MediatR;
 using Ordering.Application.Contracts.Persistence;
 
